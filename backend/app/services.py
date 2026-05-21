@@ -3,8 +3,9 @@ from pathlib import Path
 from typing import Any
 
 import httpx
+import os
 
-EXCHANGE_RATE_URL = "https://v6.exchangerate-api.com/v6/{api_key}/latest/{base_currency}"
+EXCHANGE_RATE_URL = "https://v6.exchangerate-api.com/v6/{api_key}/latest/USD"
 CACHE_FILE = Path(__file__).resolve().parent / "rates_cache.json"
 
 
@@ -25,8 +26,17 @@ def _write_cached_rates(payload: dict[str, Any]) -> None:
         pass
 
 
-def fetch_exchange_rates(base_currency: str, api_key: str = "demo") -> dict[str, float]:
-    url = EXCHANGE_RATE_URL.format(api_key=api_key, base_currency=base_currency)
+def fetch_exchange_rates(base_currency: str, api_key: str | None = None) -> dict[str, float]:
+    # prefer provided api_key then environment then demo
+    # prefer provided api_key then environment (required)
+    if not api_key:
+        api_key = os.getenv("api_key")
+
+    if not api_key:
+        raise RuntimeError("Required environment variable 'api_key' not set")
+
+    # API now uses USD as the fixed base currency
+    url = EXCHANGE_RATE_URL.format(api_key=api_key)
 
     try:
         with httpx.Client(timeout=3.0) as client:

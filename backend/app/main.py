@@ -1,5 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+import os
+
+# Fail fast if required env var is missing so container exits on startup
+if not os.getenv("api_key"):
+    raise RuntimeError("Required environment variable 'api_key' not set")
 
 from .services import fetch_exchange_rates, map_totals_by_currency
 from .validator import validate_budget_payload
