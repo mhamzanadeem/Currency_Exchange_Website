@@ -2,35 +2,36 @@
 
 Prerequisites
 - Docker and Docker Compose installed on the machine
-- Or Python 3.10 or later and pip
 
-Docker Compose
-1. Clone the repository
-   git clone <repo-url>
-2. Change directory into the project
+Docker Compose (recommended)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mhamzanadeem/Currency_Exchange_Website.git
    cd "Currency_Exchange_Website"
-3. Build and start everything
-   docker-compose up --build
+   ```
+2. Start the stack and provide your ExchangeRate-API key (replace `YOUR_REAL_API_KEY`):
+   ```bash
+   api_key=YOUR_REAL_API_KEY docker compose up --build
+   ```
+3. Frontend: open http://localhost:3000
+   Backend API: http://localhost:8000 (routes are mounted under `/api`)
 
-The backend will be available at http://localhost:8000 and the frontend at http://localhost:8080 depending on your Docker setup.
-
-
-Then open the frontend by serving the `frontend` folder with any static server or open `frontend/src/index.html` in a browser for a quick test.
 
 2. Stack choice
 
-I chose FastAPI for the backend because it is simple to read and run and it provides a clear HTTP API quickly. Python makes numeric and JSON handling straightforward and the dependency list is small. Docker Compose is used to make running the full stack easy for beginners. A worse choice would have been a heavyweight full stack framework that requires complex setup and build tooling because that would make a small assessment harder to run and understand.
+I used FastAPI for the backend because it provides a compact, easy-to-read HTTP API and good developer ergonomics for JSON and numeric handling. The frontend is a small React single-page app for a responsive, interactive UI. Docker Compose ties both services together so beginners can run the full system with one command.
 
 3. One real edge case
 
-Edge case handled: negative expense values in the submitted payload are converted to zero so they do not reduce the intended total. See [backend/app/validator.py](backend/app/validator.py#L16-L17). Without this handling a negative number in the expenses list would lower the total and produce incorrect converted totals. That could be exploited by malformed input or confuse users who accidentally enter a negative sign.
+Negative expense values are converted to zero in the validator so they cannot reduce the total. See `backend/app/validator.py` for the sanitization logic.
 
-4. AI usage
+4. AI-assisted edits
 
-- AI tool: GitHub Copilot chat using GPT-5 mini. I used it to draft `README.md` and `Answer.md`. I asked for a beginner friendly README and a human style set of answers to the five questions. The AI returned plain language drafts and suggested run commands. I reviewed those drafts and edited them.
+Some documentation and refactoring were assisted with an AI-based coding assistant; all final changes were reviewed and adjusted by the maintainer. (No automated code was blindly accepted.)
 
-Change made to AI output: I removed technical jargon and added exact runnable commands for Docker Compose and for starting the backend with `uvicorn`. I did that because the original AI draft used general phrases and did not include the exact shell commands a beginner would need to copy and paste.
+5. Known gaps / next improvements
 
-5. Honest gap
+- The frontend validates some inputs but could use more robust client-side validation and clearer error messages.
+- Add unit tests for the backend validators and integration tests for the simulate endpoint.
 
-What is not good enough: the frontend is minimal and does not validate user input before sending requests to the backend. What I would do with another day: add client side validation to prevent malformed payloads add clear error messages and add automated tests for the backend validators and for the exchange rate fallback. I would also add Docker health checks for the services.
+
