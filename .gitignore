@@ -144,3 +144,7 @@ vite.config.ts.timestamp-*
 
 # Backend cache fallback file
 backend/app/rates_cache.json
+
+# Python bytecode
+__pycache__/
+*.py[cod]
