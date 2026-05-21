@@ -1,14 +1,19 @@
-# Global Vacation Budget Simulator
+Global Vacation Budget Simulator
 
-## Overview
-_TODO: Add project overview._
+A small web app that helps estimate total trip costs in multiple currencies. Enter your base currency expenses a buffer percentage and five target currencies. The backend converts the total to the target currencies using live exchange rates.
 
-## Setup Steps
-1. _TODO: Add setup instructions._
-2. _TODO: Add docker instructions._
+This project includes a FastAPI backend and a minimal static frontend served by Nginx. It is intentionally simple so a beginner can run and explore the code.
 
-## API
-_TODO: Document backend endpoints._
+Quick start
 
-## Frontend
-_TODO: Document frontend usage._
+- Recommended: run the whole project using Docker Compose with one command.
+- Alternative: run the backend locally with a Python virtual environment.
+
+See `Answer.md` for exact commands and troubleshooting tips.
+
+Files of interest
+
+- `backend/` : FastAPI app and requirements.
+- `frontend/` : Static site for the minimal UI.
+
+Questions or problems open an issue or contact the maintainer.
