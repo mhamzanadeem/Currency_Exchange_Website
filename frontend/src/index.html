@@ -1,57 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0e1a" />
+    <meta name="description" content="Global Vacation Budget Simulator — convert your travel expenses across currencies instantly." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
     <title>Global Vacation Budget Simulator</title>
-    <style>
-      body { font-family: Arial, sans-serif; margin: 2rem; max-width: 900px; }
-      form { display: grid; gap: 0.75rem; margin-bottom: 1.5rem; }
-      input { padding: 0.4rem; }
-      table { border-collapse: collapse; width: 100%; }
-      th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
-      .row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-    </style>
   </head>
   <body>
-    <h1>Global Vacation Budget Simulator</h1>
-    <form id="budget-form">
-      <label>
-        Base Currency
-        <input id="base-currency" value="USD" maxlength="3" required />
-      </label>
-      <div class="row">
-        <label>
-          Expenses (comma separated)
-          <input id="expenses" value="1200,450,75" required />
-        </label>
-        <label>
-          Buffer (%)
-          <input id="buffer" type="number" min="0" value="10" />
-        </label>
-      </div>
-      <div class="row">
-        <label><input class="target-currency" value="EUR" maxlength="3" required /></label>
-        <label><input class="target-currency" value="GBP" maxlength="3" required /></label>
-        <label><input class="target-currency" value="PKR" maxlength="3" required /></label>
-        <label><input class="target-currency" value="JPY" maxlength="3" required /></label>
-        <label><input class="target-currency" value="AED" maxlength="3" required /></label>
-      </div>
-      <button type="submit">Simulate Budget</button>
-    </form>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Currency</th>
-          <th>Total (with buffer)</th>
-        </tr>
-      </thead>
-      <tbody id="results-body">
-        <tr><td colspan="2">Submit the form to see results.</td></tr>
-      </tbody>
-    </table>
-
-    <script src="./main.js"></script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
   </body>
 </html>
